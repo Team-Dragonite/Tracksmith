@@ -11,6 +11,11 @@ module.exports = {
     path: path.resolve(__dirname, "./build"),
     filename: "bundle.js",
   },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  },
   plugins: [new HtmlWebpackPlugin({ template: "./app/index.html" })],
   mode: "production",
   module: {
