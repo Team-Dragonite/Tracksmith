@@ -1,15 +1,13 @@
 import React from 'react';
-import SignInPage from './SignInPage.jsx';
 import { Routes, Route, Link } from 'react-router-dom';
+import SignInPage from './SignInPage.jsx';
 
-
-const App = () => {
+function App() {
   return (
-    // <Routes>
-      <SignInPage />
-    // </Routes>
-  )
+  // <Routes>
+    <SignInPage />
+  // </Routes>
+  );
 }
-
 
 export default App;
