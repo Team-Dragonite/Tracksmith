@@ -1,12 +1,12 @@
 {
-  "name": "boilerplate",
+  "name": "tracksmith",
   "version": "1.0.0",
   "description": "",
   "main": "./app/client/index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "start": "cross-env NODE_ENV=development nodemon app/server/server.js",
-    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve\" \"cross-env NODE_ENV=development nodemon ./app/server/server.js\"",
+    "dev": "concurrently \"cross-env webpack serve\" \"cross-env NODE_ENV=development nodemon ./app/server/server.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -54,7 +54,6 @@
     "babel-plugin-transform-scss": "^1.1.0",
     "concurrently": "^7.0.0",
     "cookie-parser": "^1.4.6",
-    "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
     "dotenv": "^14.3.0",
     "express": "^4.17.2",
