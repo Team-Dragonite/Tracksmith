@@ -1,12 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SignIn from './components/SignInPage.jsx';
-
-const App = () => {
-  return (
-    <SignIn />
-  )
-}
-
+import App from './components/App.jsx';
 
 ReactDOM.render(<App />, document.getElementById('root'));
