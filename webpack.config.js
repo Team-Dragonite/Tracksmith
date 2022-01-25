@@ -6,22 +6,17 @@ module.exports = {
     compress: true,
     proxy: { "/api": "http://localhost:3000" },
   },
-  entry: path.resolve(__dirname, "./client/index.js"),
+  entry: path.resolve(__dirname, "./app/client/index.js"),
   output: {
     path: path.resolve(__dirname, "./build"),
     filename: "bundle.js",
   },
-  plugins: [new HtmlWebpackPlugin({ template: "index.html" })],
-  mode: "development",
+  plugins: [new HtmlWebpackPlugin({ template: "./app/index.html" })],
+  mode: "production",
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.jsx?/,
+        test: /\.(jsx?)$/,
         exclude: /(node_modules)/,
         use: {
           loader: "babel-loader",
