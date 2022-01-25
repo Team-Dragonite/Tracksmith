@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from "@mui/styles";
+import { Routes, Route, Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -43,7 +44,7 @@ const SignIn = () => {
         <br />
         <div style={{'textAlign': 'center', 'justifyContent': 'space-between'}} >
           <Button variant="contained" onClick={handleClick}>Log In</Button>
-          <Button variant="contained" onClick={handleClick}>Sign Up</Button>
+          <Link to="/signup"><Button variant="contained" onClick={handleClick}>Sign Up</Button></Link>
         </div>
       </div>
     </Grid>
