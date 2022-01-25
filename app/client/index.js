@@ -1,7 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SignIn from './components/SignInPage.jsx';
 
-const App = () => <h1>Hello World Test</h1>
+const App = () => {
+  return (
+    <SignIn />
+  )
+}
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
