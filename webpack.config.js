@@ -17,7 +17,7 @@ module.exports = {
     maxAssetSize: 512000
   },
   plugins: [new HtmlWebpackPlugin({ template: "./app/index.html" })],
-  mode: "production",
+  mode: "development",
   module: {
     rules: [
       {

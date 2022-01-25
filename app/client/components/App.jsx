@@ -1,6 +1,6 @@
 import React from 'react';
 import SignInPage from './SignInPage.jsx';
-
-const App = () => <SignInPage />
+import Dashboard from './Dashboard.jsx';
+const App = () => <Dashboard />
 
 export default App;
