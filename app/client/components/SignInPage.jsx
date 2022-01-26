@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import { Link, Navigate } from "react-router-dom";
+import store from '../store/store.js';
 
 const SignIn = () =>  {
   const [username, setUsername] = useState("");
@@ -15,6 +16,7 @@ const SignIn = () =>  {
 
 
   const handleClick = () => {
+    
     fetch("api/login", {
       method: "POST",
       body: JSON.stringify({ username: username, password: password }),
