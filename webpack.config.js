@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   devServer: {
     compress: true,
-    proxy: { '/api': 'http://localhost:3000' },
+    proxy: { '/': 'http://localhost:3000' },
   },
   entry: path.resolve(__dirname, './app/client/index.js'),
   output: {
