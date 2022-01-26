@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import TextField from "@mui/material/TextField";
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
 
 const Dashboard = () => {
+  const [newAppCompany, setNewAppCompany] = useState('');
+  const [newAppPosition, setNewAppPosition] = useState('')
+  const [newAppDate, setNewAppDate] = useState('')
+  // const [newCompany, setNewCompany] = useState('')
+
   const columns = [
     { field: "id", headerName: "App ID", width: 70 },
     { field: "companyName", headerName: "Company Name", width: 130 },
@@ -80,8 +89,33 @@ const Dashboard = () => {
   return (
     <>
     <h1>This is the Dashboard</h1>
+    <TextField
+      id="outlined-basic"
+      label="Company"
+      variant="outlined"
+      onChange={(e) => setNewAppCompany(e.target.value)}
+    />
+    <TextField
+      id="outlined-basic"
+      label="Position"
+      variant="outlined"
+      onChange={(e) => setNewAppPosition(e.target.value)}
+    />
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <DatePicker 
+          label="Date Applied"
+          // value={new Date()}
+          onChange={(e) => setNewAppDate(e.target.value)}
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </LocalizationProvider>
+    {/* <TextField
+      id="outlined-basic"
+      label="Username"
+      variant="outlined"
+      onChange={(e) => setUsername(e.target.value)}
+    /> */}
     <div style={{ height: 400, width: "100%" }}>
-     
       <DataGrid
         rows={rows}
         columns={columns}

@@ -1,8 +1,8 @@
 DROP TABLE applications;
 
 CREATE TABLE applications(
-  _id SERIAL PRIMARY KEY,
-  application_user  VARCHAR(100) NOT NULL,
+  application_id SERIAL PRIMARY KEY,
+  application_user  VARCHAR(100),
   company VARCHAR(100) NOT NULL,
   company_type VARCHAR(100),
   job_title VARCHAR(100),
@@ -15,9 +15,10 @@ CREATE TABLE applications(
   interviewer VARCHAR,
   notes VARCHAR,
   conclusion VARCHAR,
+  creation_date VARCHAR
 );
 
-INSERT INTO users (
+INSERT INTO applications (
     application_user, company, company_type, job_title, cover_letter, resume_submitted, resume_version, 
-    application_date, hr_datem, t1_date, interviewer, notes, conclusion) VALUES ('1', 'Google', 'Tech', 
-    'Software Engineer', 'true', 'true', 'Version A', '1/24/2022', NULL, NULL, NULL, "Google is cool", 'TBD');
+    application_date, hr_date, t1_date, interviewer, notes, conclusion, creation_date) VALUES ('1', 'Google', 'Tech', 
+    'Software Engineer', 'true', 'true', 'Version A', '1/24/2022', NULL, NULL, NULL, 'Google is cool', 'TBD', '1/24/2022');
