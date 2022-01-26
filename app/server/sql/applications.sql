@@ -12,13 +12,14 @@ CREATE TABLE applications(
   application_date VARCHAR,
   hr_date VARCHAR,
   t1_date VARCHAR,
+  onsite VARCHAR,
   interviewer VARCHAR,
   notes VARCHAR,
-  conclusion VARCHAR,
+  application_status VARCHAR,
   creation_date VARCHAR
 );
 
 INSERT INTO applications (
     application_user, company, company_type, job_title, cover_letter, resume_submitted, resume_version, 
-    application_date, hr_date, t1_date, interviewer, notes, conclusion, creation_date) VALUES ('1', 'Google', 'Tech', 
-    'Software Engineer', 'true', 'true', 'Version A', '1/24/2022', NULL, NULL, NULL, 'Google is cool', 'TBD', '1/24/2022');
+    application_date, hr_date, t1_date, onsite, interviewer, notes, application_status, creation_date) VALUES ('1', 'Google', 'Tech', 
+    'Software Engineer', 'true', 'true', 'Version A', '1/24/2022', NULL, NULL, NULL, NULL, 'Google is cool', 'TBD', '1/24/2022');
