@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { Link, Navigate } from "react-router-dom";
+import store from '../store/store.js';
 
 const SignIn = () =>  {
   const [username, setUsername] = useState("");
@@ -13,6 +14,7 @@ const SignIn = () =>  {
 
 
   const handleClick = () => {
+    
     fetch("api/login", {
       method: "POST",
       body: JSON.stringify({ username: username, password: password }),

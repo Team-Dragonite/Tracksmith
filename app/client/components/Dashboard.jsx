@@ -24,16 +24,18 @@ const Dashboard = () => {
   }
 
   const columns = [
-    { field: "id", headerName: "App ID", width: 70 },
+    // { field: "id", headerName: "App ID", width: 70 },
     { field: "companyName", headerName: "Company", width: 120, editable: true },
-    { field: "companyType", headerName: "Industry", width: 120, editable: true },
+    // { field: "companyType", headerName: "Industry", width: 120, editable: true },
     { field: "position", headerName: "Position", width: 100, editable: true },
     { field: "date", headerName: "Date Applied", type: "date", width: 120, editable: true },
     { field: "coverLetter", headerName: "Cover Letter", width: 120, editable: true },
     { field: "resumeSubmitted", headerName: "Resume Version", width: 140, editable: true },
-    { field: "interviewStatus", headerName: "Interview Status", width: 140, editable: true },
-    { field: "onSite", headerName: "On-Site?", width: 85, editable: true },
-    { field: "offer", headerName: "Offer?", width: 80, editable: true },
+    // { field: "interviewStatus", headerName: "Interview Status", width: 140, editable: true },
+    { field: "HRScreen", headerName: "HR Screening", type: 'date', width: 140, editable: true },
+    { field: "technicalInterview", headerName: "Technical Interview", type: 'date', width: 160, editable: true },
+    { field: "onSite", headerName: "On-Site", type: 'date', width: 100, editable: true },
+    { field: "status", headerName: "Status", width: 80, editable: true },
     { field: "notes", headerName: "Notes", width: 120, editable: true },
     { field: "updateButton", headerName: "Update", sortable: false, width: 100, renderCell: (params) => {
       const onClick = () => {
