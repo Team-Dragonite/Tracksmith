@@ -10,7 +10,7 @@ router.post(
   UserController.verifyUser,
   UserController.setSessionCookie,
   (req, res) => {
-    res.sendStatus(200).redirect('/');
+    res.status(200).set({'Content-Type': 'application/json'}).send({response: true});
   }
 );
 
