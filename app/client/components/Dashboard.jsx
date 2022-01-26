@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import {TextField,Button,Box} from "@mui/material";
+import { Link } from "react-router-dom";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
+
 
 const Dashboard = () => {
   const [newAppCompany, setNewAppCompany] = useState('');
@@ -120,6 +120,18 @@ const Dashboard = () => {
   return (
     <>
     <h1>This is the Dashboard</h1>
+
+    <Link to="/">
+<Button variant="contained">
+  Back
+</Button>
+</Link>
+
+<Link to="/conversion">
+<Button variant="contained">
+  Conversion Rates
+</Button>
+</Link>
     <TextField
       id="outlined-basic"
       label="Company"
