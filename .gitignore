@@ -1,4 +1,6 @@
 *.env
+build
+package-lock.json
 
 # Logs
 logs

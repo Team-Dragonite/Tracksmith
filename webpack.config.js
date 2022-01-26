@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   devServer: {
     compress: true,
-    proxy: { '/': 'http://localhost:3000' },
+    proxy: { '/api': 'http://localhost:3000' },
   },
   entry: path.resolve(__dirname, './app/client/index.js'),
   output: {
@@ -16,8 +16,8 @@ module.exports = {
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
-  plugins: [new HtmlWebpackPlugin({ template: "./app/index.html" })],
-  mode: "development",
+  plugins: [new HtmlWebpackPlugin({ template: './app/index.html' })],
+  mode: 'development',
   module: {
     rules: [
       {
