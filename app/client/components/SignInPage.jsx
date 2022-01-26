@@ -3,12 +3,15 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 import { Link, Navigate } from "react-router-dom";
 
 const SignIn = () =>  {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loginStatus, setLoginStatus] = useState(false);
+  const [loginStatus, setLoginStatus] = useState('');
+  const [loginError, setLoginError] = useState('')
 
 
   const handleClick = () => {
@@ -18,7 +21,9 @@ const SignIn = () =>  {
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
-      .then((data) => setLoginStatus(data.response));
+      .then((data) => {
+        setLoginStatus(data.response)
+      });
   };
 
   return (
@@ -65,6 +70,9 @@ const SignIn = () =>  {
                 </Button>
               </Link>
             </Box>
+            {/* <Alert severity="error">
+              <AlertTitle>{loginError}</AlertTitle>
+            </Alert> */}
           </Box>
         </Grid>
       )}

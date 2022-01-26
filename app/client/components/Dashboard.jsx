@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -12,6 +12,12 @@ const Dashboard = () => {
   const [newAppPosition, setNewAppPosition] = useState('');
   const [newAppDate, setNewAppDate] = useState('');
   // const [newCompany, setNewCompany] = useState('');
+
+  useEffect(() => {
+    console.log('useffect in dashboard')
+    //will be used to fetch (sending usernane to API)
+    // and receive all application data
+  }, [])
 
   const handleClick = () => {
     console.log('hello button')
@@ -29,12 +35,23 @@ const Dashboard = () => {
     { field: "onSite", headerName: "On-Site?", width: 85, editable: true },
     { field: "offer", headerName: "Offer?", width: 80, editable: true },
     { field: "notes", headerName: "Notes", width: 120, editable: true },
-    { field: "updateButton", headerName: "Update", sortable: false, width: 100, editable: true, renderCell: (params) => {
-      const onClick = () => console.log('update button clicked');
+    { field: "updateButton", headerName: "Update", sortable: false, width: 100, renderCell: (params) => {
+      const onClick = () => {
+        const api = params.api;
+        const thisRow = {};
+        api.getAllColumns().filter((c) => c.field !== "__check__" && !!c).forEach((c) => (thisRow[c.field] = params.getValue(params.id, c.field)));
+        return alert(JSON.stringify(thisRow));
+      }
       return <Button onClick={onClick}>Update</Button>
     }},
-    { field: "deleteButton", headerName: "Delete", sortable: false, width: 100, editable: true, renderCell: (params) => {
-      const onClick = () => console.log('delete button clicked');
+    { field: "deleteButton", headerName: "Delete", sortable: false, width: 100, renderCell: (params) => {
+      const onClick = () => {
+        const api = params.api;
+        const thisRow = {};
+        console.log(api.getAllColumns())
+        api.getAllColumns().forEach((c) => (thisRow[c.field] = params.getValue(params.id, c.field)));
+        return alert(JSON.stringify(thisRow));
+      }
       return <Button onClick={onClick}>Delete</Button>
     }}
   ];
