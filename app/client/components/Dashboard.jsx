@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
@@ -11,23 +13,47 @@ const Dashboard = () => {
   const [newAppDate, setNewAppDate] = useState('');
   // const [newCompany, setNewCompany] = useState('');
 
+  useEffect(() => {
+    console.log('useffect in dashboard')
+    //will be used to fetch (sending usernane to API)
+    // and receive all application data
+  }, [])
+
+  const handleClick = () => {
+    console.log('hello button')
+  }
+
   const columns = [
     { field: "id", headerName: "App ID", width: 70 },
-    { field: "companyName", headerName: "Company Name", width: 130 },
-    { field: "position", headerName: "Position", width: 130 },
-    {
-      field: "date",
-      headerName: "Date Applied",
-      type: "number",
-      width: 130,
-    },
-    {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 160,
-    },
+    { field: "companyName", headerName: "Company", width: 120, editable: true },
+    { field: "companyType", headerName: "Industry", width: 120, editable: true },
+    { field: "position", headerName: "Position", width: 100, editable: true },
+    { field: "date", headerName: "Date Applied", type: "date", width: 120, editable: true },
+    { field: "coverLetter", headerName: "Cover Letter", width: 120, editable: true },
+    { field: "resumeSubmitted", headerName: "Resume Version", width: 140, editable: true },
+    { field: "interviewStatus", headerName: "Interview Status", width: 140, editable: true },
+    { field: "onSite", headerName: "On-Site?", width: 85, editable: true },
+    { field: "offer", headerName: "Offer?", width: 80, editable: true },
+    { field: "notes", headerName: "Notes", width: 120, editable: true },
+    { field: "updateButton", headerName: "Update", sortable: false, width: 100, renderCell: (params) => {
+      const onClick = () => {
+        const api = params.api;
+        const thisRow = {};
+        api.getAllColumns().filter((c) => c.field !== "__check__" && !!c).forEach((c) => (thisRow[c.field] = params.getValue(params.id, c.field)));
+        return alert(JSON.stringify(thisRow));
+      }
+      return <Button onClick={onClick}>Update</Button>
+    }},
+    { field: "deleteButton", headerName: "Delete", sortable: false, width: 100, renderCell: (params) => {
+      const onClick = () => {
+        const api = params.api;
+        const thisRow = {};
+        console.log(api.getAllColumns())
+        api.getAllColumns().forEach((c) => (thisRow[c.field] = params.getValue(params.id, c.field)));
+        return alert(JSON.stringify(thisRow));
+      }
+      return <Button onClick={onClick}>Delete</Button>
+    }}
   ];
 
   const rows = [
@@ -85,6 +111,9 @@ const Dashboard = () => {
       position: "SDE9",
       date: "1/9/21",
     },
+    {
+      id: 10
+    }
   ];
   return (
     <>
@@ -101,26 +130,30 @@ const Dashboard = () => {
       variant="outlined"
       onChange={(e) => setNewAppPosition(e.target.value)}
     />
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker 
-          label="Date Applied"
-          // value={new Date()}
-          onChange={(e) => setNewAppDate(e.target.value)}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </LocalizationProvider>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DatePicker 
+        label="Date Applied"
+        value={newAppDate}
+        onChange={(e) => setNewAppDate(e)}
+        renderInput={(params) => <TextField {...params} />}
+      />
+    </LocalizationProvider>
+    <Box>
+      <Button variant="contained" onClick={handleClick}>Add Application</Button>
+    </Box>
     {/* <TextField
       id="outlined-basic"
       label="Username"
       variant="outlined"
       onChange={(e) => setUsername(e.target.value)}
     /> */}
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: 600, width: "100%" }}>
       <DataGrid
+        editMode="row"
         rows={rows}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
       />
     </div>
     </>

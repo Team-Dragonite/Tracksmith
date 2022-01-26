@@ -6,18 +6,18 @@ import Grid from "@mui/material/Grid";
 import { Navigate } from "react-router-dom";
 
 const SignUp = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [signUpStatus, setSignUpStatus] = useState(false);
 
   const handleClick = () => {
-    fetch('/signup', {
+    fetch('api/signup', {
       method: 'POST',
-      body: JSON.stringify({firstName, lastName, username, password}),
+      body: JSON.stringify({firstname, lastname, username, password}),
       headers: {'Content-type': 'application/json'} 
-    }).then(response => response.json()).then(data => console.log(data))
+    }).then(response => response.json()).then(data => setSignUpStatus(data.response));
   };
 
   return (
