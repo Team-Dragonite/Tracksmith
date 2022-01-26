@@ -50,7 +50,7 @@ const Dashboard = () => {
       id: 5,
       companyName: "LinkedIn",
       position: "SDE5",
-      date: "1/5/21",
+      date: "1/5/21", 
     },
     {
       id: 6,
