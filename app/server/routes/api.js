@@ -81,17 +81,7 @@ module.exports = router;
  * POST /api/login {"username": "test2", "password": "password123"}
  * POST /api/signup {“username”: “test2", “password”: “password123", “firstname”: “test2", “lastname”:“test2"}
  * POST /api/getApplications {"users.username": "test2"}
- * POST /api/postApplication {"application_user": "", "company": "", "company_type": "", "job_title": "",
-    cover_letter,
-    resume_submitted,
-    resume_version,
-    application_date,
-    hr_date,
-    t1_date,
-    interviewer,
-    notes,
-    conclusion,
-    creation_date}
+ * POST /api/postApplication {"application_user": "", "company": "", "company_type": "", "job_title": "", "cover_letter": "", "resume_submitted": "", "resume_version": "", "application_date": "", "hr_date": "", "t1_date": "", "interviewer": "", notes: "", conclusion: "", "creation_date": ""}
  * PUT /api/putApplication/:application_id
  * DELETE /api/deleteApplication/:application_id
  * POST api/applicationsCalendar/ {"session_id": "02674334-d1e5-4b7b-900a-42bfeedc7b9d"}
