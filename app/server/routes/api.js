@@ -32,7 +32,7 @@ router.post(
 
 // once user signs in they are given their job applications page
 router.post(
-  '/getApplications/',
+  '/getApplications',
   //UserController.authorizeSession,
   //UserController.getApplicationsForAuthorizedUser,
   ApplicationController.getApplications,

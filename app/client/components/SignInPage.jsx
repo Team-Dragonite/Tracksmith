@@ -7,16 +7,17 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import { Link, Navigate } from "react-router-dom";
 import store from '../store/store.js';
+import storeUsername from "../store/actions.js";
 
 const SignIn = () =>  {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState('');
-  const [loginError, setLoginError] = useState('')
+  // const [loginError, setLoginError] = useState('')
 
-
+  
   const handleClick = () => {
-    
+    store.dispatch(storeUsername(username))
     fetch("api/login", {
       method: "POST",
       body: JSON.stringify({ username: username, password: password }),

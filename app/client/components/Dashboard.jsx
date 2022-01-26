@@ -6,21 +6,29 @@ import Box from "@mui/material/Box";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
+import { useSelector } from 'react-redux';
+import store from '../store/store.js'
 
 const Dashboard = () => {
   const [newAppCompany, setNewAppCompany] = useState('');
   const [newAppPosition, setNewAppPosition] = useState('');
   const [newAppDate, setNewAppDate] = useState('');
+  const [allApplications, setAllApplications] = useState([])
   // const [newCompany, setNewCompany] = useState('');
-
+  const findUsername = useSelector((state) => state.username);
+  
   useEffect(() => {
-    console.log('useffect in dashboard')
+    fetch('api/getApplications', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username: findUsername})
+    }).then((response) => response.json()).then(data => console.log(data))
     //will be used to fetch (sending usernane to API)
     // and receive all application data
-  }, [])
+  }, [findUsername])
 
   const handleClick = () => {
-    console.log('hello button')
+    fetch('')
   }
 
   const columns = [
@@ -65,57 +73,6 @@ const Dashboard = () => {
       position: "SDE1",
       date: "1/1/21",
     },
-    {
-      id: 2,
-      companyName: "Google",
-      position: "SDE2",
-      date: "1/2/21",
-    },
-    {
-      id: 3,
-      companyName: "Meta",
-      position: "SDE3",
-      date: "1/3/21",
-    },
-    {
-      id: 4,
-      companyName: "Microsoft",
-      position: "SDE4",
-      date: "1/4/21",
-    },
-    {
-      id: 5,
-      companyName: "LinkedIn",
-      position: "SDE5",
-      date: "1/5/21",
-    },
-    {
-      id: 6,
-      companyName: "Uber",
-      position: "SDE6",
-      date: "1/6/21",
-    },
-    {
-      id: 7,
-      companyName: "Shopify",
-      position: "SDE7",
-      date: "1/7/21",
-    },
-    {
-      id: 8,
-      companyName: "Netflix",
-      position: "SDE8",
-      date: "1/8/21",
-    },
-    {
-      id: 9,
-      companyName: "CodeSmith",
-      position: "SDE9",
-      date: "1/9/21",
-    },
-    {
-      id: 10
-    }
   ];
   return (
     <>
