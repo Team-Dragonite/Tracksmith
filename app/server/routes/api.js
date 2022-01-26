@@ -89,8 +89,8 @@ module.exports = router;
  * POST /api/login {"username": "test2", "password": "password123"}
  * POST /api/signup {“username”: “test2", “password”: “password123", “firstname”: “test2", “lastname”:“test2"}
  * POST /api/getApplications {"users.username": "test2"}
- * POST /api/postApplication {"application_user": "", "company": "", "company_type": "", "job_title": "", "cover_letter": "", "resume_submitted": "", "resume_version": "", "application_date": "", "hr_date": "", "t1_date": "", "interviewer": "", "notes": "", "conclusion": "", "creation_date": ""}
- * PUT /api/putApplication/:application_id {"application_id": "", "company": "", "company_type": "", "job_title": "", "cover_letter": "", "resume_submitted": "", "resume_version": "", "application_date": "", "hr_date": "", "t1_date": "", "interviewer": "", "notes": "", "conclusion": ""}
+ * POST /api/postApplication {"application_user": "test2", "company": "test", "position": "SWE", "date": "1/26/22"}
+ * PUT /api/putApplication/:application_id {“companyName”: “test123", “position”: “SWE2", “date”: “1/27/22", “coverLetter”:“true”, “resumeSubmitted”:“Version A”, “HRScreen”:“1/27/22", “technicalInterview”: “2/23/22", “onSite”: “1/31/22", “status”:“rejected”, “notes”: “this is an update”}
  * DELETE /api/deleteApplication/:application_id
  * POST api/applicationsCalendar/ {"session_id": "02674334-d1e5-4b7b-900a-42bfeedc7b9d"}
  */

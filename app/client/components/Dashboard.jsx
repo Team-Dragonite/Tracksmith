@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import {TextField,Button,Box} from "@mui/material";
+import { Link } from "react-router-dom";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import { useSelector } from 'react-redux';
 import store from '../store/store.js'
+
 
 const Dashboard = () => {
   const [newAppCompany, setNewAppCompany] = useState('');
@@ -33,18 +33,18 @@ const Dashboard = () => {
 
   const columns = [
     // { field: "id", headerName: "App ID", width: 70 },
-    { field: "companyName", headerName: "Company", width: 120, editable: true },
+    { field: "companyName", headerName: "Company", width: 120, editable: true }, // company
     // { field: "companyType", headerName: "Industry", width: 120, editable: true },
-    { field: "position", headerName: "Position", width: 100, editable: true },
-    { field: "date", headerName: "Date Applied", type: "date", width: 120, editable: true },
-    { field: "coverLetter", headerName: "Cover Letter", width: 120, editable: true },
-    { field: "resumeSubmitted", headerName: "Resume Version", width: 140, editable: true },
+    { field: "position", headerName: "Position", width: 100, editable: true }, // job_title
+    { field: "date", headerName: "Date Applied", type: "date", width: 120, editable: true }, // application_date
+    { field: "coverLetter", headerName: "Cover Letter", width: 120, editable: true },  // cover_letter
+    { field: "resumeSubmitted", headerName: "Resume Version", width: 140, editable: true }, // resume_submitted
     // { field: "interviewStatus", headerName: "Interview Status", width: 140, editable: true },
-    { field: "HRScreen", headerName: "HR Screening", type: 'date', width: 140, editable: true },
-    { field: "technicalInterview", headerName: "Technical Interview", type: 'date', width: 160, editable: true },
-    { field: "onSite", headerName: "On-Site", type: 'date', width: 100, editable: true },
-    { field: "status", headerName: "Status", width: 80, editable: true },
-    { field: "notes", headerName: "Notes", width: 120, editable: true },
+    { field: "HRScreen", headerName: "HR Screening", type: 'date', width: 140, editable: true }, // hr_date
+    { field: "technicalInterview", headerName: "Technical Interview", type: 'date', width: 160, editable: true }, // t1_date
+    { field: "onSite", headerName: "On-Site", type: 'date', width: 100, editable: true }, // onsite
+    { field: "status", headerName: "Status", width: 80, editable: true }, // application_status
+    { field: "notes", headerName: "Notes", width: 120, editable: true },  // notes
     { field: "updateButton", headerName: "Update", sortable: false, width: 100, renderCell: (params) => {
       const onClick = () => {
         const api = params.api;
@@ -77,6 +77,18 @@ const Dashboard = () => {
   return (
     <>
     <h1>This is the Dashboard</h1>
+
+    <Link to="/">
+<Button variant="contained">
+  Back
+</Button>
+</Link>
+
+<Link to="/conversion">
+<Button variant="contained">
+  Conversion Rates
+</Button>
+</Link>
     <TextField
       id="outlined-basic"
       label="Company"
