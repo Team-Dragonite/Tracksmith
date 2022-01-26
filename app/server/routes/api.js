@@ -1,14 +1,14 @@
 const express = require('express');
-const userController = require('../controllers/userController');
-const applicationController = require('../controllers/applicationController');
+const UserController = require('../controllers/UserController.js');
+const ApplicationController = require('../controllers/ApplicationController.js');
 
 const router = new express.Router();
 
 // user posts exisitng credentials
 router.post(
   '/login',
-  userController.verifyUser,
-  // middleware to set session cookie
+  UserController.verifyUser,
+  UserController.setSessionCookie,
   (req, res) => {
     res.sendStatus(200).redirect('/');
   }
@@ -17,19 +17,18 @@ router.post(
 // user posts new credentials
 router.post(
   '/signup',
-//   userController.createUser,
-userController.test,
-  // middleware to set session cookie
+  UserController.createUser,
+  UserController.setSessionCookie,
   (req, res) => {
-    res.sendStatus(200);//.redirect('/login');
+    res.sendStatus(200).redirect('/login');
   }
 );
 
 // once user signs in they are given their job applications page
-router.get(
+router.post(
   '/getApplications/',
-  // middleware to verify user is signed in
-  applicationController.getApplications,
+  UserController.authorizeSession,
+  UserController.getApplicationsForAuthorizedUser,
   (req, res) => {
     res.status(200).json(res.locals.applications);
   }
@@ -37,10 +36,12 @@ router.get(
 
 // user addition of a new job application
 router.post(
-  '/postApplication/',
+  '/postApplication',
   // middleware to verify user is signed in
-  applicationController.postApplication,
+  UserController.authorizeSession,
+  ApplicationController.postApplication,
   (req, res) => {
+    console.log('were are in the router');
     res.status(200).json(res.locals.applications);
   }
 );
@@ -59,7 +60,7 @@ router.put(
 router.delete(
   '/deleteApplication/:application_id', //consider cloaking application_id
   // middleware to verify user is signed in
-  applicationController.deleteApplication,
+  ApplicationController.deleteApplication,
   (req, res) => {
     res.status(200).json(res.locals.applications);
   }
@@ -75,3 +76,23 @@ router.get(
 );
 
 module.exports = router;
+
+/**
+ * POST /api/login {"username": "test2", "password": "password123"}
+ * POST /api/signup {“username”: “test2", “password”: “password123", “firstname”: “test2", “lastname”:“test2"}
+ * POST /api/getApplications {"users.username": "test2"}
+ * POST /api/postApplication {"application_user": "", "company": "", "company_type": "", "job_title": "",
+    cover_letter,
+    resume_submitted,
+    resume_version,
+    application_date,
+    hr_date,
+    t1_date,
+    interviewer,
+    notes,
+    conclusion,
+    creation_date}
+ * PUT /api/putApplication/:application_id
+ * DELETE /api/deleteApplication/:application_id
+ * POST api/applicationsCalendar/ {"session_id": "02674334-d1e5-4b7b-900a-42bfeedc7b9d"}
+ */
