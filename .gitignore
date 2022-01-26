@@ -1,4 +1,5 @@
 *.env
+package-lock*
 
 # Logs
 logs
