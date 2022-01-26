@@ -10,7 +10,7 @@ const SignUp = () => {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [signUpStatus, setSignUpStatus] = useState(false);
+  const [signUpStatus,] = useState(false);
 
   const handleClick = () => {
     fetch('/signup', {

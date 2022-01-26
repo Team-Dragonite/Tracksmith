@@ -6,10 +6,9 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 
 const Dashboard = () => {
-  const [newAppCompany, setNewAppCompany] = useState('');
-  const [newAppPosition, setNewAppPosition] = useState('');
-  const [newAppDate, setNewAppDate] = useState('');
-  // const [newCompany, setNewCompany] = useState('');
+  const [, setNewAppCompany] = useState('');
+  const [, setNewAppPosition] = useState('');
+  const [, setNewAppDate] = useState('');
 
   const columns = [
     { field: "id", headerName: "App ID", width: 70 },
@@ -88,7 +87,7 @@ const Dashboard = () => {
   ];
   return (
     <>
-    <h1>This is the Dashboard</h1>
+    <h1>Tracksmith Application Tracker</h1>
     <TextField
       id="outlined-basic"
       label="Company"
@@ -104,17 +103,10 @@ const Dashboard = () => {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker 
           label="Date Applied"
-          // value={new Date()}
           onChange={(e) => setNewAppDate(e.target.value)}
           renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
-    {/* <TextField
-      id="outlined-basic"
-      label="Username"
-      variant="outlined"
-      onChange={(e) => setUsername(e.target.value)}
-    /> */}
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
         rows={rows}

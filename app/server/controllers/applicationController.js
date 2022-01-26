@@ -4,7 +4,6 @@ const db = require('../models/dbModel.js');
 const ApplicationController = {};
 
 ApplicationController.getApplications = (req, res, next) => {
-  console.log('We are in the get applications controller');
   const text = `
     SELECT * FROM applications
     INNER JOIN users ON applications.application_user = users.username;`;
@@ -15,13 +14,12 @@ ApplicationController.getApplications = (req, res, next) => {
       return next();
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       return next(err);
     });
 };
 
 ApplicationController.postApplication = (req, res, next) => {
-  console.log('We are in the post applications controller');
   const creation_date = new Date().toLocaleString();
   const text = `INSERT into applications (application_user, company, company_type, job_title, cover_letter, resume_submitted, resume_version,
     application_date, hr_date, t1_date, interviewer, notes, conclusion, creation_date
@@ -51,8 +49,6 @@ ApplicationController.postApplication = (req, res, next) => {
 };
 
 ApplicationController.putApplication = (req, res, next) => {
-  console.log('We are in the application controller');
-  console.log(req.body);
   const text = `UPDATE applications SET company=$1, company_type=$2, job_title=$3, cover_letter=$4, resume_submitted=$5, 
                 resume_version=$6, application_date=$7, hr_date=$8, t1_date=$9, interviewer=$10, notes=$11, conclusion=$12 
                 WHERE application_id=$13;`;
@@ -84,7 +80,6 @@ ApplicationController.putApplication = (req, res, next) => {
 };
 
 ApplicationController.deleteApplication = (req, res, next) => {
-  console.log('We are in the delete application controller');
   const text = 'DELETE FROM applications WHERE application_id=$1;';
   const values = [req.params.application_id];
 

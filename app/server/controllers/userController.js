@@ -5,9 +5,6 @@ const uuid = require('uuid');
 const UserController = {};
 
 UserController.createUser = (req, res, next) => {
-  console.log('We are in the user controller create user middleware');
-  console.log('this is req.body', req.body);
-  //console.log(bcrypt.hashSync(req.body.password, 10))
   const hash = bcrypt.hashSync(req.body.password, 10);
   if (!req.body.username || !req.body.password)
     return next(
@@ -20,15 +17,13 @@ UserController.createUser = (req, res, next) => {
     hash,
     req.body.firstname,
     req.body.lastname,
-    //req.cookies.session_id,
   ];
-  console.log(values);
   db.query(text, values)
     .then((response) => {
       return next();
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       return next(err);
     });
 };
@@ -37,10 +32,7 @@ UserController.test = (res, req, next) => {
   return next();
 };
 
-// console.log('this is req.body', req.body);
-
 UserController.verifyUser = (req, res, next) => {
-  console.log('We are in the user controller verify user middleware');
   if (!req.body.username)
     return next(new Error('Please input a valid username'));
   const text = `SELECT * FROM users WHERE username=$1;`;
@@ -48,20 +40,17 @@ UserController.verifyUser = (req, res, next) => {
   db.query(text, values)
     .then((response) => {
       if (!response.rows.length) {
-        console.log('username not found');
         return next(new Error('Username not found'));
       }
       const hash = response.rows[0].passcode;
       if (bcrypt.compareSync(req.body.password, hash)) {
-        console.log('password is correct');
         return next();
       } else {
-        console.log('password incorrect');
         return next(new Error('Password was incorrect'));
       }
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       return next(err);
     });
 };

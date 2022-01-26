@@ -41,11 +41,9 @@ router.post(
   UserController.authorizeSession,
   ApplicationController.postApplication,
   (req, res) => {
-    console.log('were are in the router');
     res.status(200).json(res.locals.applications);
   }
 );
-
 // update job application
 router.put(
   '/putApplication/:application_id', //consider cloaking application_id

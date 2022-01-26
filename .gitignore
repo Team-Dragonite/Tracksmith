@@ -1,5 +1,6 @@
 *.env
 package-lock*
+build
 
 # Logs
 logs

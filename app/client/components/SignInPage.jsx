@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
+import {Button,Grid, TextField, Box} from "@mui/material";
 import { Link, Navigate } from "react-router-dom";
 
 const SignIn = () =>  {
@@ -62,6 +59,11 @@ const SignIn = () =>  {
               <Link to="/signup">
                 <Button variant="contained" onClick={handleClick}>
                   Sign Up
+                </Button>
+              </Link>
+              <Link to="/visualization">
+                <Button variant="contained">
+                  See Visualization
                 </Button>
               </Link>
             </Box>
