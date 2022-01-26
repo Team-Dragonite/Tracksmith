@@ -15,7 +15,7 @@ const SignUp = () => {
   const handleClick = () => {
     fetch('/signup', {
       method: 'POST',
-      body: JSON.stringify([firstName, lastName, username, password]),
+      body: JSON.stringify({firstName, lastName, username, password}),
       headers: {'Content-type': 'application/json'} 
     }).then(response => response.json()).then(data => console.log(data))
   };
