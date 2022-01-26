@@ -7,9 +7,9 @@ import DatePicker from '@mui/lab/DatePicker';
 
 const Dashboard = () => {
   const [newAppCompany, setNewAppCompany] = useState('');
-  const [newAppPosition, setNewAppPosition] = useState('')
-  const [newAppDate, setNewAppDate] = useState('')
-  // const [newCompany, setNewCompany] = useState('')
+  const [newAppPosition, setNewAppPosition] = useState('');
+  const [newAppDate, setNewAppDate] = useState('');
+  // const [newCompany, setNewCompany] = useState('');
 
   const columns = [
     { field: "id", headerName: "App ID", width: 70 },
