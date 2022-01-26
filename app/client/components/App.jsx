@@ -4,9 +4,7 @@ import SignInPage from './SignInPage.jsx';
 
 function App() {
   return (
-  // <Routes>
     <SignInPage />
-  // </Routes>
   );
 }
 

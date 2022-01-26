@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 function SignIn() {
   const [username, setUsername] = useState("");
@@ -15,7 +15,7 @@ function SignIn() {
     fetch("/login", {
       method: "POST",
       body: JSON.stringify({ username, password }),
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" }
     })
       .then((response) => response.json())
       .then((data) => setLoginStatus(data.response));
@@ -30,20 +30,19 @@ function SignIn() {
           alignItems="center"
           justifyContent="center"
         >
-          <Box>
-            <Box>
+         
               <h1 style={{ textAlign: "center" }}>Tracksmith</h1>
-            </Box>
-            <Box>
+
+          
               <TextField
                 id="outlined-basic"
                 label="Username"
                 variant="outlined"
                 onChange={(e) => setUsername(e.target.value)}
               />
-            </Box>
-            <br />
-            <Box>
+          
+   
+        
               <TextField
                 id="outlined-basic"
                 type="password"
@@ -51,11 +50,8 @@ function SignIn() {
                 variant="outlined"
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </Box>
-            <br />
-            <Box
-              style={{ textAlign: "center", justifyContent: "space-between" }}
-            >
+        
+      
               <Button variant="contained" onClick={handleClick}>
                 Log In
               </Button>
@@ -64,8 +60,7 @@ function SignIn() {
                   Sign Up
                 </Button>
               </Link>
-            </Box>
-          </Box>
+        
         </Grid>
       )}
 
