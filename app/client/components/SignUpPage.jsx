@@ -13,7 +13,7 @@ const SignUp = () => {
   const [signUpStatus, setSignUpStatus] = useState(false);
 
   const handleClick = () => {
-    fetch('/signup', {
+    fetch('api/signup', {
       method: 'POST',
       body: JSON.stringify({firstName, lastName, username, password}),
       headers: {'Content-type': 'application/json'} 
