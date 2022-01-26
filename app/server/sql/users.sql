@@ -2,7 +2,7 @@ DROP TABLE users;
 
 CREATE TABLE users(
   user_id SERIAL PRIMARY KEY,
-  username  VARCHAR(100) NOT NULL,
+  username  VARCHAR(100) NOT NULL UNIQUE,
   passcode  VARCHAR(100) NOT NULL,
   firstname VARCHAR(100) NOT NULL,
   lastname VARCHAR(100) NOT NULL,

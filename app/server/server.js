@@ -22,7 +22,15 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  res.status(500).send(`Internal Server Error: ${err.message}`);
+  console.log('new error', err.message);
+  if (
+    err.message ==
+    'duplicate key value violates unique constraint "users_username_key"'
+  ) {
+    res.status(505).send(`Internal Server Error: ${err.message}`);
+  } else {
+    res.status(500).send(`Internal Server Error: ${err.message}`);
+  }
 });
 
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));

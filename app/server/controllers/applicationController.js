@@ -5,11 +5,13 @@ const ApplicationController = {};
 
 ApplicationController.getApplications = (req, res, next) => {
   console.log('We are in the get applications controller');
+  console.log(req.body.username);
   const text = `
     SELECT * FROM applications
-    INNER JOIN users ON applications.application_user = users.username;`;
+    WHERE application_user = $1;`;
+  const values = [req.body.username];
   // frontend will control order of applications
-  db.query(text)
+  db.query(text, values)
     .then((response) => {
       res.locals.applications = response.rows;
       return next();
@@ -66,7 +68,7 @@ ApplicationController.putApplication = (req, res, next) => {
     req.body.application_date,
     req.body.hr_date,
     req.body.t1_date,
-    rew.body.interviewer,
+    req.body.interviewer,
     req.body.notes,
     req.body.conclusion,
     req.params.application_id,
@@ -87,7 +89,6 @@ ApplicationController.deleteApplication = (req, res, next) => {
   console.log('We are in the delete application controller');
   const text = 'DELETE FROM applications WHERE application_id=$1;';
   const values = [req.params.application_id];
-
   db.query(text, values)
     .then(() => {
       next();

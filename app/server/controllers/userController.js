@@ -33,12 +33,6 @@ UserController.createUser = (req, res, next) => {
     });
 };
 
-UserController.test = (res, req, next) => {
-  return next();
-};
-
-// console.log('this is req.body', req.body);
-
 UserController.verifyUser = (req, res, next) => {
   console.log('We are in the user controller verify user middleware');
   if (!req.body.username)
