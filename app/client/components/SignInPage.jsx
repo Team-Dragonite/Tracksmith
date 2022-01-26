@@ -12,9 +12,9 @@ const SignIn = () =>  {
 
 
   const handleClick = () => {
-    fetch("/login", {
+    fetch("api/login", {
       method: "POST",
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username: username, password: password }),
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
