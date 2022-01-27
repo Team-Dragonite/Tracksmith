@@ -19,6 +19,11 @@ const reducer = (state = initialState, action) => {
         ...state, username: action.payload
       }
     }
+    case 'SET_CONVERSION': {
+      return {
+        ...state, conversion: action.payload
+      }
+    }
     default:
       return state
   }

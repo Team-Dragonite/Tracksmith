@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import Typography from '@mui/material/Typography';
 import { Link, Navigate } from "react-router-dom";
 import store from '../store/store.js';
 import storeUsername from "../store/actions.js";
@@ -38,9 +39,11 @@ const SignIn = () =>  {
         >
           <Box>
             <Box>
-              <h1 style={{ textAlign: "center" }}>Tracksmith</h1>
+              <Typography variant="h1" component="div" gutterBottom>
+                TrackSmith
+              </Typography>
             </Box>
-            <Box>
+            <Box style={{ textAlign: "center", justifyContent: "space-between" }}>
               <TextField
                 id="outlined-basic"
                 label="Username"
@@ -49,7 +52,7 @@ const SignIn = () =>  {
               />
             </Box>
             <br />
-            <Box>
+            <Box style={{ textAlign: "center", justifyContent: "space-between" }}>
               <TextField
                 id="outlined-basic"
                 type="password"
@@ -60,13 +63,13 @@ const SignIn = () =>  {
             </Box>
             <br />
             <Box
-              style={{ textAlign: "center", justifyContent: "space-between" }}
+              style={{ textAlign: "center", justifyContent: "space-between", marginLeft: '20', marginRight: '20'}}
             >
-              <Button variant="contained" onClick={handleClick}>
+              <Button variant="contained" onClick={handleClick} style={{marginLeft: '20', marginRight: '20'}}>
                 Log In
               </Button>
               <Link to="/signup">
-                <Button variant="contained" onClick={handleClick}>
+                <Button variant="contained" onClick={handleClick} style={{marginLeft: '20', marginRight: '20'}}>
                   Sign Up
                 </Button>
               </Link>
