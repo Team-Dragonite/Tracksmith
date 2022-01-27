@@ -32,7 +32,7 @@ router.post(
 
 // once user signs in they are given their job applications page
 router.post(
-  '/getApplications/',
+  '/getApplications',
   //UserController.authorizeSession,
   //UserController.getApplicationsForAuthorizedUser,
   ApplicationController.getApplications,
@@ -49,7 +49,7 @@ router.post(
   ApplicationController.postApplication,
   (req, res) => {
     console.log('were are in the router');
-    res.status(200).json(res.locals.applications);
+    res.status(200).json({response: res.locals.applications});
   }
 );
 

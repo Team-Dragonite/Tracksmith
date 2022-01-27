@@ -4,6 +4,7 @@ const path = require('path');
 module.exports = {
   devServer: {
     compress: true,
+    allowedHosts: ['.tracksmith.io'],
     proxy: { '/api': 'http://localhost:3000' },
   },
   entry: path.resolve(__dirname, './app/client/index.js'),

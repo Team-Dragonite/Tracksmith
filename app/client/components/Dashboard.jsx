@@ -5,26 +5,87 @@ import { Link } from "react-router-dom";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
+import { useSelector } from 'react-redux';
+import Typography from '@mui/material/Typography';
+import store from '../store/store.js'
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
 const Dashboard = () => {
   const [newAppCompany, setNewAppCompany] = useState('');
   const [newAppPosition, setNewAppPosition] = useState('');
   const [newAppDate, setNewAppDate] = useState('');
+  const [allApplications, setAllApplications] = useState([])
+  const [postResponse, setPostResponse] = useState('')
   // const [newCompany, setNewCompany] = useState('');
+  const findUsername = useSelector((state) => state.username);
+  
+  const rows = [];
+  
+  useEffect(() => {
+    getApplications();
+  }, [findUsername])
 
   useEffect(() => {
-    console.log('useffect in dashboard')
-    //will be used to fetch (sending usernane to API)
-    // and receive all application data
-  }, [])
+    console.log('update')
+  }, [allApplications])
 
   const handleClick = () => {
-    console.log('hello button')
+    fetch('/api/postApplication', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        application_user: findUsername,
+        companyName: newAppCompany,
+        position: newAppPosition,
+        date: newAppDate
+      })
+    }).then(() => getApplications())
+      
+  }
+
+  const getApplications = () => {
+    fetch('api/getApplications', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username: findUsername})
+    }).then((response) => response.json()).then(data => {
+      const conversions = {hrScreen: 0, technicalInterview: 0, onSite: 0, totals: 0}
+        for(let i = 0; i < data.length;i++) {
+          const currentApplication = {
+            id: data[i].application_id,
+            companyName: data[i].company,
+            position: data[i].job_title,
+            date: data[i].application_date,
+            coverLetter: data[i].cover_letter,
+            resumeSubmitted: data[i].resume_submitted,
+            HRScreen: data[i].hr_date,
+            technicalInterview: data[i].t1_date,
+            onSite: data[i].onsite,
+            status: data[i].application_status,
+            notes: data[i].notes
+          };
+          if(currentApplication.HRScreen){
+            conversions.hrScreen++
+          }
+          if(currentApplication.technicalInterview){
+            conversions.technicalInterveiw++;
+          }
+          if(currentApplication.onSite){
+            conversions.onSite++;
+          }
+        rows.push(currentApplication);
+      }
+      conversions.totals = rows.length;
+      store.dispatch({type: 'SET_CONVERSION', payload: conversions})
+      setAllApplications(rows)})
   }
 
   const columns = [
-    // { field: "id", headerName: "App ID", width: 70 },
+    { field: "id", headerName: "App ID", width: 0 },
     { field: "companyName", headerName: "Company", width: 120, editable: true }, // company
     // { field: "companyType", headerName: "Industry", width: 120, editable: true },
     { field: "position", headerName: "Position", width: 100, editable: true }, // job_title
@@ -41,8 +102,12 @@ const Dashboard = () => {
       const onClick = () => {
         const api = params.api;
         const thisRow = {};
-        api.getAllColumns().filter((c) => c.field !== "__check__" && !!c).forEach((c) => (thisRow[c.field] = params.getValue(params.id, c.field)));
-        return alert(JSON.stringify(thisRow));
+        api.getAllColumns().forEach((c) => (thisRow[c.field] = params.getValue(params.id, c.field)));
+        fetch(`/api/putApplication/${thisRow.id}`, {
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(thisRow)
+        }).then(() => getApplications())
       }
       return <Button onClick={onClick}>Update</Button>
     }},
@@ -50,98 +115,33 @@ const Dashboard = () => {
       const onClick = () => {
         const api = params.api;
         const thisRow = {};
-        console.log(api.getAllColumns())
         api.getAllColumns().forEach((c) => (thisRow[c.field] = params.getValue(params.id, c.field)));
-        return alert(JSON.stringify(thisRow));
+        fetch(`/api/deleteApplication/${thisRow.id}`, {
+          method: 'DELETE'
+        }).then(() => getApplications())
       }
       return <Button onClick={onClick}>Delete</Button>
     }}
   ];
 
-  const rows = [
-    {
-      id: 1,
-      companyName: "Amazon",
-      position: "SDE1",
-      date: "1/1/21",
-    },
-    {
-      id: 2,
-      companyName: "Google",
-      position: "SDE2",
-      date: "1/2/21",
-    },
-    {
-      id: 3,
-      companyName: "Meta",
-      position: "SDE3",
-      date: "1/3/21",
-    },
-    {
-      id: 4,
-      companyName: "Microsoft",
-      position: "SDE4",
-      date: "1/4/21",
-    },
-    {
-      id: 5,
-      companyName: "LinkedIn",
-      position: "SDE5",
-      date: "1/5/21",
-    },
-    {
-      id: 6,
-      companyName: "Uber",
-      position: "SDE6",
-      date: "1/6/21",
-    },
-    {
-      id: 7,
-      companyName: "Shopify",
-      position: "SDE7",
-      date: "1/7/21",
-    },
-    {
-      id: 8,
-      companyName: "Netflix",
-      position: "SDE8",
-      date: "1/8/21",
-    },
-    {
-      id: 9,
-      companyName: "CodeSmith",
-      position: "SDE9",
-      date: "1/9/21",
-    },
-    {
-      id: 10
-    }
-  ];
   return (
     <>
-    <h1>This is the Dashboard</h1>
+    <Typography variant="h1" component="div" gutterBottom>
+      TrackSmith Application Dashboard    
+    </Typography>
 
-    <Link to="/">
-<Button variant="contained">
-  Back
-</Button>
-</Link>
-
-<Link to="/conversion">
-<Button variant="contained">
-  Conversion Rates
-</Button>
-</Link>
     <TextField
       id="outlined-basic"
       label="Company"
       variant="outlined"
+      value={newAppCompany}
       onChange={(e) => setNewAppCompany(e.target.value)}
     />
     <TextField
       id="outlined-basic"
       label="Position"
       variant="outlined"
+      value={newAppPosition}
       onChange={(e) => setNewAppPosition(e.target.value)}
     />
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -152,9 +152,18 @@ const Dashboard = () => {
         renderInput={(params) => <TextField {...params} />}
       />
     </LocalizationProvider>
-    <Box>
-      <Button variant="contained" onClick={handleClick}>Add Application</Button>
-    </Box>
+      <Button variant="contained" onClick={handleClick} style={{marginLeft: '50', marginRight: '50'}}>Add Application</Button>
+      <Link to="/conversion">
+        <Button variant="contained" style={{marginLeft: '50', marginRight: '50'}}>
+          Conversion Rates
+        </Button>
+      </Link>
+      <Link to="/">
+        <Button variant="contained" style={{marginLeft: '500', marginRight: '500'}}>
+          Sign Out
+        </Button>
+      </Link>
+
     {/* <TextField
       id="outlined-basic"
       label="Username"
@@ -164,7 +173,7 @@ const Dashboard = () => {
     <div style={{ height: 600, width: "100%" }}>
       <DataGrid
         editMode="row"
-        rows={rows}
+        rows={allApplications}
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10]}
