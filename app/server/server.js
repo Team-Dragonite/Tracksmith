@@ -22,7 +22,6 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.log('new error', err.message);
   if (
     err.message ==
     'duplicate key value violates unique constraint "users_username_key"'
@@ -34,14 +33,3 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
-
-// this is req.body <ref *2> ServerResponse {
-//   req: IncomingMessage {
-//     body: {
-//       username: 'test2',
-//       password: 'password123',
-//       firstname: 'test2',
-//       lastname: 'test2'
-//     },
-//   }
-// }

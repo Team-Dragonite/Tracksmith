@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { VictoryBar, VictoryChart, VictoryTheme } from "victory";
-
-const rows = [];
 
 const ConversionRates = () => {
 
@@ -41,8 +39,5 @@ return (
     </VictoryChart>
   </>
   )
-}
-  //getApplications()
-  
-  
+} 
 export default ConversionRates;
