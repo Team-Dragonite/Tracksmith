@@ -11,7 +11,7 @@ const conversionData = useSelector((state) => state.conversions);
 
 return (
 <>
-    <h1>Conversion Rate Chart</h1>
+    <h1 style={{textAlign: 'center'}}>Conversion Rate Chart</h1>
     <Link to="/dashboard">
       <Button variant="contained">
         Back
@@ -21,19 +21,18 @@ return (
       padding={{ top: 40, bottom: 80, left: 40, right: 80 }}
       theme={VictoryTheme.material}
       domainPadding={{ x: 10 }}
-      height={210}
-      width={300}
+      height={180}
+      width={400}
     >
       <VictoryBar
         barWidth={({ index }) => (index + 1) * 2 + 10}
-        cornerRadius={{ topLeft: ({ datum }) => datum.x * 4 }}
+        cornerRadius={{ topLeft: ({ datum }) => datum.x * 1.5 }}
         style={{ data: { fill: "#F4511E" } }}
         data={[
           { x: 1, y: conversionData?.totals, label: "Total Applications" },
-          { x: 2, y: conversionData?.hrScreen, label: "Initial Phone Call" },
-          { x: 3, y: conversionData?.technicalInterview, label: "Technical Interwiews" },
-          { x: 4, y: conversionData?.onSite, label: "OnSite Interwiews" },
-          { x: 5, y: 5, label: "Offers" },
+          { x: 2, y: conversionData?.hrScreen, label: "Initial Screening" },
+          { x: 3, y: conversionData?.technicalInterview, label: "Interwiews" },
+          { x: 4, y: 10, label: "Offers" },
         ]}
       />
     </VictoryChart>

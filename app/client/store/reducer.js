@@ -1,4 +1,13 @@
-const initialState = {}
+const initialState = {
+  conversions: {
+    totals: 100,
+    hrScreen: 60,
+    technicalInterview: 40,
+    onSite: 3
+  }
+}
+
+
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
