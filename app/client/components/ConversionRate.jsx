@@ -10,32 +10,6 @@ const ConversionRates = () => {
 
 const conversionData = useSelector((state) => state.conversions);
 
-console.log(conversionData)
-
-// useEffect(() => {
-//   fetch('api/getApplications', {
-//     method: 'POST',
-//     headers: {'Content-Type': 'application/json'},
-//     body: JSON.stringify({username: findUsername})
-//   }).then((response) => response.json()).then(data => {
-//       for(let i = 0; i < data.length;i++) {
-//         const currentApplication = {
-//           id: data[i].application_id,
-//           companyName: data[i].company,
-//           position: data[i].job_title,
-//           date: data[i].application_date,
-//           coverLetter: data[i].cover_letter,
-//           resumeSubmitted: data[i].resume_submitted,
-//           HRScreen: data[i].hr_date,
-//           technicalInterview: data[i].t1_date,
-//           onSite: data[i].onsite,
-//           status: data[i].application_status,
-//           notes: data[i].notes
-//         };
-//       rows.push(currentApplication);
-//     }
-//     setAllApplications(rows)})
-// }, []);
 
 return (
 <>
