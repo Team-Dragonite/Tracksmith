@@ -48,7 +48,6 @@ router.post(
   // UserController.authorizeSession,
   ApplicationController.postApplication,
   (req, res) => {
-    console.log('were are in the router');
     res.status(200).json({response: res.locals.applications});
   }
 );

@@ -4,26 +4,22 @@ const db = require('../models/dbModel.js');
 const ApplicationController = {};
 
 ApplicationController.getApplications = (req, res, next) => {
-  console.log('We are in the get applications controller');
-  console.log(req.body.username);
   const text = `
     SELECT * FROM applications
     WHERE application_user = $1;`;
   const values = [req.body.username];
-  // frontend will control order of applications
   db.query(text, values)
     .then((response) => {
       res.locals.applications = response.rows;
       return next();
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       return next(err);
     });
 };
 
 ApplicationController.postApplication = (req, res, next) => {
-  console.log('We are in the post applications controller');
   const creation_date = new Date().toLocaleString();
   const text = `INSERT into applications (application_user, company, job_title, 
                application_date, creation_date) VALUES($1, $2, $3, $4, $5);`;
@@ -44,8 +40,6 @@ ApplicationController.postApplication = (req, res, next) => {
 };
 
 ApplicationController.putApplication = (req, res, next) => {
-  console.log('We are in the application controller');
-  console.log(req.body);
   const text = `UPDATE applications SET company=$1, job_title=$2, application_date=$3, cover_letter=$4, resume_submitted=$5, hr_date=$6, t1_date=$7, onsite=$8, application_status=$9, notes=$10 
                 WHERE application_id=$11`;
 
@@ -62,7 +56,6 @@ ApplicationController.putApplication = (req, res, next) => {
     req.body.notes, // 10 - notes
     req.params.application_id, // 11 - application_id
   ];
-  console.log(values);
   db.query(text, values)
     .then((response) => {
       res.locals.updatedApplication = response.rows;
@@ -75,7 +68,6 @@ ApplicationController.putApplication = (req, res, next) => {
 };
 
 ApplicationController.deleteApplication = (req, res, next) => {
-  console.log('We are in the delete application controller');
   const text = 'DELETE FROM applications WHERE application_id=$1;';
   const values = [req.params.application_id];
   db.query(text, values)

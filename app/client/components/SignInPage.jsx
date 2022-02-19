@@ -11,8 +11,7 @@ import storeUsername from "../store/actions.js";
 const SignIn = () =>  {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loginStatus, setLoginStatus] = useState('');
-  // const [loginError, setLoginError] = useState('')
+  const [loginStatus, setLoginStatus] = useState(true);
 
   
   const handleClick = () => {
@@ -30,7 +29,7 @@ const SignIn = () =>  {
 
   return (
     <>
-      {!loginStatus && (
+      {loginStatus && (
         <Grid
           container
           direction="column"

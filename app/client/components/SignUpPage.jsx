@@ -30,7 +30,7 @@ const SignUp = () => {
           justifyContent="center"
         >
           <Box>
-            <h1>This is the sign up page</h1>
+            <h1>Signup Page</h1>
           </Box>
           <Box>
             <TextField
