@@ -7,7 +7,6 @@ import store from './store/store.js';
 
 const App = React.lazy(() => import("./components/App.jsx"));
 const SignUp = React.lazy(() => import("./components/SignUpPage.jsx"));
-
 const Dashboard = React.lazy(() => import("./components/Dashboard.jsx"));
 
 ReactDOM.render(
