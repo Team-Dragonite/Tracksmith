@@ -67,7 +67,6 @@
     "sass": "^1.44.0",
     "superagent": "^7.1.1",
     "supertest": "^6.2.2"
-
   },
   "dependencies": {
     "@babel/core": "^7.16.12",
@@ -98,6 +97,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-testing-library": "^8.0.1",
+    "redux": "^4.1.2",
     "sass": "^1.49.0",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",

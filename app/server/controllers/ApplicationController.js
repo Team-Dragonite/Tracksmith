@@ -1,5 +1,7 @@
-const bcrypt = require('bcryptjs');
-const db = require('../models/dbModel.js');
+/* eslint-disable camelcase */
+/* eslint-disable no-console */
+const bcrypt = require('bcryptjs'); // bcrypt not used
+const db = require('../models/dbModel');
 
 const ApplicationController = {};
 
@@ -32,7 +34,7 @@ ApplicationController.postApplication = (req, res, next) => {
   ];
   // username, companyname, position, date
   db.query(text, values)
-    .then((response) => next())
+    .then((response) => next()) // eslint error - response not used - is this correct??
     .catch((err) => {
       console.error(err);
       return next(err);
