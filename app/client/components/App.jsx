@@ -1,6 +1,10 @@
-import React from 'react';
-import SignInPage from './SignInPage.jsx';
+import React from 'react'; // React is not used
+import { render } from 'react-dom';
+import SignInPage from './SignInPage';
 
-const App = () => <SignInPage />
+const root = document.querySelector('root');
 
+const App = () => {
+  render(SignInPage, root);
+};
 export default App;

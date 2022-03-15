@@ -1,10 +1,12 @@
+/* eslint-disable no-console */
 const express = require('express');
+
 const app = express();
 const path = require('path');
-const apiRouter = require('./routes/api.js');
 const bodyParser = require('body-parser');
+const apiRouter = require('./routes/api');
 
-const PORT = 3000;
+const PORT = 3200;
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,10 +23,9 @@ app.use((req, res) => {
   res.sendStatus(404);
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   if (
-    err.message ==
-    'duplicate key value violates unique constraint "users_username_key"'
+    err.message === 'duplicate key value violates unique constraint "users_username_key"'
   ) {
     res.status(505).send(`Internal Server Error: ${err.message}`);
   } else {
