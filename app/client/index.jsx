@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import ConversionRates from './components/ConversionRate.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './store/store.js';
+import store from './store/store';
 
-const App = React.lazy(() => import("./components/App.jsx"));
-const SignUp = React.lazy(() => import("./components/SignUpPage.jsx"));
-const Dashboard = React.lazy(() => import("./components/Dashboard.jsx"));
+const App = React.lazy(() => import('./components/App'));
+const SignUp = React.lazy(() => import('./components/SignUpPage'));
+const Dashboard = React.lazy(() => import('./components/Dashboard'));
 
 ReactDOM.render(
   <BrowserRouter>
